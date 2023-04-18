@@ -15,6 +15,20 @@ return response.json();
     console.log('Error:'+error);
 });
 }
+async function readFileAsync() {
+    let data = await fetch('customers.json');
+    let customers = await data.json();
+    generateHTML(customers);
+}
+async function readFileAsync2(){
+    try {
+        let data = await fetch('customers.json');
+        let customers = await data.json();
+        generateHTML(customers);
+    } catch {
+        console.log('Error,could not read from json file.');
+    }
+}
 
 //Render HTML
 function generateHTML(customers) {
@@ -32,3 +46,5 @@ function generateHTML(customers) {
     document.querySelector('body').append(customerDiv);
 }
 readFilePromise();
+readFileAsync();
+readFileAsync2();
